@@ -84,7 +84,8 @@ public:
 
   ~SynapticonSystemInterface();
 
-  hardware_interface::CallbackReturn on_init(const hardware_interface::HardwareInfo& info) override;
+  hardware_interface::CallbackReturn
+  on_init(const hardware_interface::HardwareComponentInterfaceParams& params) override;
 
   hardware_interface::return_type prepare_command_mode_switch(const std::vector<std::string>& start_interfaces,
                                                               const std::vector<std::string>& stop_interfaces) override;
@@ -129,6 +130,8 @@ private:
 
   // Objects for logging
   std::shared_ptr<rclcpp::Logger> logger_;
+
+  std::vector<double> mechanical_reductions_;
 
   // Store the commands for the simulated robot
   std::vector<double> hw_commands_positions_;

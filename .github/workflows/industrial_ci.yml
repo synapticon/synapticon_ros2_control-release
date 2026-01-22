@@ -2,9 +2,9 @@ name: Industrial CI
 
 on:
   push:
-    branches: [ humble ]
+    branches: [ jazzy ]
   pull_request:
-    branches: [ humble ]
+    branches: [ jazzy ]
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         env:
-          - {ROS_DISTRO: humble, ROS_REPO: main}
+          - {ROS_DISTRO: jazzy, ROS_REPO: main}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

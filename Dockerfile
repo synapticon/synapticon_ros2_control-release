@@ -1,10 +1,16 @@
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=rolling
 
 # Use official ROS2 images
 FROM ros:${ROS_DISTRO}
 
 # Set the shell to bash
 SHELL ["/bin/bash", "-c"]
+
+# Set up ROS 2 repository and GPG keys
+ARG ROS_APT_SOURCE_VERSION=1.1.0
+RUN curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $UBUNTU_CODENAME)_all.deb" \
+    && apt install -y /tmp/ros2-apt-source.deb \
+    && rm /tmp/ros2-apt-source.deb
 
 # Set up ROS2 workspace
 WORKDIR /synapticon_ros2_control_ws
