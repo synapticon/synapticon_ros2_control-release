@@ -1,6 +1,11 @@
-name: CI
+name: Industrial CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ humble ]
+  pull_request:
+    branches: [ humble ]
+  workflow_dispatch:
 
 jobs:
   industrial_ci:
@@ -8,10 +13,8 @@ jobs:
       matrix:
         env:
           - {ROS_DISTRO: humble, ROS_REPO: main}
-          - {ROS_DISTRO: jazzy, ROS_REPO: main}
-          - {ROS_DISTRO: rolling, ROS_REPO: main}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: 'ros-industrial/industrial_ci@master'
-        env: ${{matrix.env}}
+        env: ${{ matrix.env }}
