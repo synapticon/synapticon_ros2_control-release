@@ -1,0 +1,12 @@
+Source: ros-jazzy-synapticon-ros2-control
+Section: misc
+Priority: optional
+Maintainer: Elevate Robotics <andyzelenak@elevaterobotics.ai>
+Build-Depends: debhelper (>= 9.0.0), libcap-dev, ros-jazzy-ament-cmake, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-hardware-interface, ros-jazzy-pluginlib, ros-jazzy-rclcpp, ros-jazzy-rclcpp-lifecycle, ros-jazzy-ros-testing <!nocheck>, ros-jazzy-ros-workspace
+Homepage: https://www.synapticon.com/en/products/ros2-integration-von-synapticon
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-synapticon-ros2-control
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libcap-dev, ros-jazzy-controller-manager, ros-jazzy-forward-command-controller, ros-jazzy-hardware-interface, ros-jazzy-joint-state-broadcaster, ros-jazzy-joint-trajectory-controller, ros-jazzy-pluginlib, ros-jazzy-rclcpp, ros-jazzy-rclcpp-lifecycle, ros-jazzy-robot-state-publisher, ros-jazzy-ros2controlcli, ros-jazzy-ros2launch, ros-jazzy-rviz2, ros-jazzy-xacro, ros-jazzy-ros-workspace
+Description: A ros2_control interface for Synapticon motor drivers
