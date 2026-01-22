@@ -1,3 +1,26 @@
+## synapticon_ros2_control (rolling) - 0.3.0-1
+
+The packages in the `synapticon_ros2_control` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling -e synapticon_ros2_control --override-release-repository-url https://github.com/synapticon/synapticon_ros2_control-release.git` on `Thu, 22 Jan 2026 12:23:42 -0000`
+
+The `synapticon_ros2_control` package was released.
+
+Version of package(s) in repository `synapticon_ros2_control`:
+
+- upstream repository: https://github.com/synapticon/synapticon_ros2_control.git
+- release repository: https://github.com/ros2-gbp/synapticon_ros2_control-release.git
+- rosdistro version: `0.1.2-1`
+- old version: `0.1.2-1`
+- new version: `0.3.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## synapticon_ros2_control (jazzy) - 0.2.0-1
 
 The packages in the `synapticon_ros2_control` repository were released into the `jazzy` distro by running `/usr/bin/bloom-release --rosdistro jazzy -e synapticon_ros2_control` on `Thu, 22 Jan 2026 12:09:10 -0000`
