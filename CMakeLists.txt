@@ -57,10 +57,12 @@ target_include_directories(synapticon_ros2_control PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/oshw/${OS}>
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/soem>
 )
-target_link_libraries(synapticon_ros2_control synapticon_soem)
-ament_target_dependencies(
+target_link_libraries(
   synapticon_ros2_control
-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+  hardware_interface::hardware_interface
+  pluginlib::pluginlib
+  rclcpp_lifecycle::rclcpp_lifecycle
+  synapticon_soem
 )
 
 # Export hardware plugins
@@ -68,9 +70,13 @@ pluginlib_export_plugin_description_file(hardware_interface synapticon_ros2_cont
 
 # A simple executable to test Synapticon connection without ros2_control
 add_executable(torque_control_executable src/torque_control_executable.cpp)
-target_link_libraries(torque_control_executable synapticon_soem)
-ament_target_dependencies(torque_control_executable
-                          ${THIS_PACKAGE_INCLUDE_DEPENDS})
+target_link_libraries(
+  torque_control_executable
+  hardware_interface::hardware_interface
+  pluginlib::pluginlib
+  rclcpp_lifecycle::rclcpp_lifecycle
+  synapticon_soem
+)
 
 install(
   DIRECTORY include/
@@ -94,26 +100,28 @@ install(
   DESTINATION share/synapticon_ros2_control
 )
 install(
-  DIRECTORY bringup/launch bringup/config
+  DIRECTORY bringup/launch bringup/config scripts
   DESTINATION share/synapticon_ros2_control
 )
+install(
+  DIRECTORY test/
+  DESTINATION share/synapticon_ros2_control/test
+)
+
+ament_export_targets(synapticon_soem HAS_LIBRARY_TARGET)
+ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 
 if(BUILD_TESTING)
-  # TODO
+  find_package(ament_cmake_gtest REQUIRED)
+  find_package(ros_testing REQUIRED)
+
+  # Test that controller_manager launching succeeds
+  ament_add_gtest_executable(test_controller_manager_integration
+    test/test_controller_manager_integration.cpp)
+  ament_target_dependencies(test_controller_manager_integration
+    ${THIS_PACKAGE_INCLUDE_DEPENDS})
+  add_ros_test(test/launch/simple_test_with_virtual_eth.launch.py
+    TIMEOUT 30 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 endif()
 
-ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
-ament_export_include_directories(
-  include
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/osal
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/osal/${OS}
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/oshw/${OS}
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/soem
-)
-
-# Install meshes directory
-install(DIRECTORY meshes/
-  DESTINATION share/${PROJECT_NAME}/meshes
-)
-ament_export_targets(synapticon_soem HAS_LIBRARY_TARGET)
 ament_package()
