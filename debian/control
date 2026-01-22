@@ -1,0 +1,12 @@
+Source: ros-rolling-synapticon-ros2-control
+Section: misc
+Priority: optional
+Maintainer: Elevate Robotics <andyzelenak@elevaterobotics.ai>
+Build-Depends: debhelper (>= 9.0.0), libcap-dev, ros-rolling-ament-cmake, ros-rolling-ament-cmake-gtest <!nocheck>, ros-rolling-hardware-interface, ros-rolling-pluginlib, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle, ros-rolling-ros-testing <!nocheck>, ros-rolling-ros-workspace
+Homepage: https://www.synapticon.com/en/products/ros2-integration-von-synapticon
+Standards-Version: 3.9.2
+
+Package: ros-rolling-synapticon-ros2-control
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libcap-dev, ros-rolling-controller-manager, ros-rolling-forward-command-controller, ros-rolling-hardware-interface, ros-rolling-joint-state-broadcaster, ros-rolling-joint-trajectory-controller, ros-rolling-pluginlib, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle, ros-rolling-robot-state-publisher, ros-rolling-ros2controlcli, ros-rolling-ros2launch, ros-rolling-rviz2, ros-rolling-xacro, ros-rolling-ros-workspace
+Description: A ros2_control interface for Synapticon motor drivers
